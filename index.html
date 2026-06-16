@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="format-detection" content="telephone=no">
+  <title>周杰伦的播放器</title>
+  <!-- Jay H5 V0.1 | 设计稿: Figma 780px → 390px -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+  <div class="app">
+    <div class="swiper main-swiper">
+      <div class="swiper-wrapper">
+
+        <!-- Page 1 首页 -->
+        <div class="swiper-slide">
+          <div class="page1">
+            <img class="bg" src="assets/bg.jpg" alt="">
+            <div class="status-bar">
+              <button type="button" class="icon-btn icon-btn--back btn-back" aria-label="返回"><img src="assets/icon-back.svg" alt=""></button>
+              <button type="button" class="icon-btn icon-btn--share btn-share" id="btn-page1-share" aria-label="分享"><img src="assets/icon-share.svg" alt=""></button>
+            </div>
+            <div class="logo-wrap">
+              <img src="assets/logo.png" alt="Jay">
+            </div>
+            <div class="text-block">
+              <h1 class="title-gradient">周杰伦的播放器</h1>
+              <h2 class="title-gradient">你的私人影音室</h2>
+            </div>
+            <div class="btn-wrap">
+              <button class="btn-gold" id="btn-enter">
+                <img src="assets/btn1.png" alt="">
+                <span>进入</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Page 2 皮肤选择 -->
+        <div class="swiper-slide">
+          <div class="page2">
+            <img class="bg" src="assets/page2-bg.jpg" alt="">
+            <div class="bg-light"></div>
+            <div class="status-bar status-bar--back-only">
+              <button type="button" class="icon-btn icon-btn--back btn-back" aria-label="返回"><img src="assets/icon-back.svg" alt=""></button>
+            </div>
+            <div class="skin-area">
+              <div class="swiper skin-swiper">
+                <div class="swiper-wrapper" id="skin-slides"></div>
+              </div>
+            </div>
+            <p class="subtitle">探索影音室音乐灵感</p>
+            <div class="avatar-row">
+              <div class="avatars">
+                <span></span><span></span><span></span>
+              </div>
+              <span>2384W杰迷</span>
+              <span>已参与</span>
+            </div>
+            <div class="btn-wrap">
+              <button class="btn-gold" id="btn-select-skin">
+                <img src="assets/btn1.png" alt="">
+                <span>选择</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Page 3 + Page 4 播放器 & 答题 -->
+        <div class="swiper-slide">
+          <div class="page3" id="page3">
+            <img class="player-bg" src="assets/player-bg.png" alt="">
+            <div class="status-bar status-bar--back-only">
+              <button type="button" class="icon-btn icon-btn--back btn-back" aria-label="返回"><img src="assets/icon-back.svg" alt=""></button>
+            </div>
+            <div class="player-skin" id="player-skin-display">
+              <img src="assets/skin-sample.png" alt="播放器皮肤">
+            </div>
+            <button class="audio-control" id="audio-toggle" aria-label="播放/暂停">▶</button>
+            <div class="bottom-mask"></div>
+            <div class="lyrics-wrap" id="lyrics-wrap">
+              <p class="lyrics-line active" id="lyrics-current">想要和你飞到宇宙中</p>
+            </div>
+            <div class="card-flip-wrap" id="card-flip-wrap">
+              <div class="card-flip" id="quiz-card">
+                <!-- Page3 答题正面 -->
+                <div class="card-face card-front">
+                  <img class="card-frame" src="assets/card-frame.png" alt="">
+                  <div class="card-inner">
+                    <p class="question">音乐梦境起点 这首歌是？</p>
+                    <div class="options">
+                      <div class="option" data-answer="A">
+                        <span class="letter">A</span>
+                        <span class="text">可爱女人</span>
+                      </div>
+                      <div class="option" data-answer="B">
+                        <span class="letter">B</span>
+                        <span class="text">半岛铁盒</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Page4 翻转背面：严格还原 Figma card 结构 -->
+                <div class="card-face card-back">
+                  <div class="card-p4">
+                    <div class="card-p4__bg"></div>
+                    <img class="card-p4__frame" src="assets/card-p4-frame.png" alt="">
+                    <div class="card-p4__content">
+                      <img class="card-p4__cover" id="result-cover" src="assets/card-p4-cover.png" alt="专辑封面">
+                      <div class="card-p4__text">
+                        <p class="card-p4__title" id="result-title">
+                          <span>JAY</span><span>·</span><span>周杰伦的播放器</span>
+                        </p>
+                        <p class="card-p4__song" id="result-song">
+                          <span class="label">灵感歌曲：</span><span class="value">可爱女人</span>
+                        </p>
+                        <p class="card-p4__desc" id="result-desc">2000年音乐梦境起点，青涩漂浮、天马行空</p>
+                      </div>
+                    </div>
+                    <div class="card-p4__btn" aria-hidden="true">
+                      <img src="assets/btn2.png" alt="">
+                      <span>继续答题</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Page4 btn2 可点击热区（置于 3D 翻转层外） -->
+            <button type="button" class="btn-continue-hit" id="btn-continue" aria-label="继续答题"></button>
+          </div>
+        </div>
+
+        <!-- Page 5 分享页 -->
+        <div class="swiper-slide">
+          <div class="page5" id="page5">
+            <div class="status-bar status-bar--back-only">
+              <button type="button" class="icon-btn icon-btn--back btn-back" aria-label="返回"><img src="assets/icon-back.svg" alt=""></button>
+            </div>
+            <img class="share-pic" src="assets/share-pic.png" alt="分享海报">
+            <div class="share-bar">
+              <div class="share-icons">
+                <div class="share-item"><div class="icon-circle icon-save"><img src="assets/share-save.png" alt=""></div><span>保存图片</span></div>
+                <div class="share-item"><div class="icon-circle"><img src="assets/share-wechat.png" alt=""></div><span>微信</span></div>
+                <div class="share-item"><div class="icon-circle"><img src="assets/share-moments.png" alt=""></div><span>朋友圈</span></div>
+                <div class="share-item"><div class="icon-circle"><img src="assets/share-xhs.png" alt=""></div><span>小红书</span></div>
+                <div class="share-item"><div class="icon-circle"><img src="assets/share-qq.png" alt=""></div><span>QQ</span></div>
+                <div class="share-item"><div class="icon-circle"><img src="assets/share-qzone.png" alt=""></div><span>QQ空间</span></div>
+                <div class="share-item"><div class="icon-circle"><img src="assets/share-putong.png" alt=""></div><span>扑通动态</span></div>
+              </div>
+              <button class="close-btn" id="btn-close-share" type="button" aria-label="关闭"></button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Page 6 长页图文 -->
+        <div class="swiper-slide">
+          <div class="page6" id="page6">
+            <div class="status-bar status-bar--back-only">
+              <button type="button" class="icon-btn icon-btn--back btn-back" aria-label="返回"><img src="assets/icon-back.svg" alt=""></button>
+            </div>
+            <div class="page6-canvas">
+              <img class="p6-header" src="assets/page6-header.png" alt="">
+              <h1 class="p6-main-title title-gradient">地表最强粉</h1>
+              <span class="p6-subtitle-row p6-sub-mid">挑战成功</span>
+              <span class="p6-subtitle-row p6-sub-num">16款</span>
+              <span class="p6-subtitle-row p6-sub-right">全系播放器</span>
+              <img class="p6-skins-grid" src="assets/page6-skins-grid.png" alt="16款播放器皮肤">
+              <button class="p6-btn1 p6-btn1--mid" id="btn-page6-continue1" type="button" aria-label="继续答题">
+                <img src="assets/page6-btn1.png" alt="">
+              </button>
+
+              <div class="p6-year p6-year--jay">2000</div>
+              <div class="p6-year-label p6-year-label--jay">起点 音乐梦境</div>
+              <div class="p6-quote p6-quote--jay" aria-hidden="true">"</div>
+              <img class="p6-player p6-player--jay" src="assets/page6-player-jay.png" alt="JAY 播放器皮肤">
+              <img class="p6-album p6-album--jay" src="assets/page6-album-jay.png" alt="JAY 专辑封面">
+              <p class="p6-desc p6-desc--jay">周杰伦带着 R&amp;B 与嘻哈 《JAY》撞开华语乐坛的门 可爱女人、星晴、龙卷风... 青春有了姓周的 BGM</p>
+              <button class="p6-btn3 p6-btn3--1" type="button" aria-label="收藏专辑 解锁播放器">
+                <img src="assets/page6-btn3.png" alt="收藏专辑 解锁播放器">
+              </button>
+
+              <div class="p6-year p6-year--fantasy">2001</div>
+              <div class="p6-year-label p6-year-label--fantasy">Fantasy不止幻想</div>
+              <div class="p6-quote p6-quote--fantasy" aria-hidden="true">"</div>
+              <img class="p6-player p6-player--fantasy" src="assets/page6-player-fantasy.png" alt="范特西 播放器皮肤">
+              <img class="p6-album p6-album--fantasy" src="assets/page6-album-fantasy.png" alt="范特西 专辑封面">
+              <p class="p6-desc p6-desc--fantasy">爱在西元前、双截棍、简单爱… 《范特西》中西穿越天马行空 你的青春里， 一定有过这张 CD</p>
+              <button class="p6-btn3 p6-btn3--2" type="button" aria-label="收藏专辑 解锁播放器">
+                <img src="assets/page6-btn3.png" alt="收藏专辑 解锁播放器">
+              </button>
+
+              <div class="p6-year p6-year--badu">2002</div>
+              <div class="p6-year-label p6-year-label--badu">八度音阶帝国</div>
+              <div class="p6-quote p6-quote--badu" aria-hidden="true">"</div>
+              <img class="p6-player p6-player--badu" src="assets/page6-player-badu.png" alt="八度空间 播放器皮肤">
+              <img class="p6-album p6-album--badu" src="assets/page6-album-badu.png" alt="八度空间 专辑封面">
+              <p class="p6-desc p6-desc--badu">半岛铁盒、暗号、回到过去 旋律更成熟，节奏更锋利 少年锋芒全在这张《八度空间》 属于我们的秘密基地，永远循环</p>
+              <button class="p6-btn3 p6-btn3--3" type="button" aria-label="收藏专辑 解锁播放器">
+                <img src="assets/page6-btn3.png" alt="收藏专辑 解锁播放器">
+              </button>
+
+              <div class="p6-year p6-year--ye">2003</div>
+              <div class="p6-year-label p6-year-label--ye">温柔碰撞锋芒</div>
+              <div class="p6-quote p6-quote--ye" aria-hidden="true">"</div>
+              <img class="p6-player p6-player--ye" src="assets/page6-player-ye.png" alt="叶惠美 播放器皮肤">
+              <img class="p6-album p6-album--ye" src="assets/page6-album-ye.png" alt="叶惠美 专辑封面">
+              <p class="p6-desc p6-desc--ye">以父之名、晴天、东风破 暗黑叙事、校园遗憾、中国风 一张《叶惠美》 半部青春史 每首都是刻在 DNA 里的旋律</p>
+
+              <button class="p6-btn1 p6-btn1--bottom" id="btn-page6-continue2" type="button" aria-label="继续答题">
+                <img src="assets/page6-btn1.png" alt="">
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <audio id="bg-audio" preload="auto" crossorigin="anonymous">
+    <!-- 占位音频：SoundHelix 开源示例，后续替换为正式周杰伦歌曲 -->
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+  </audio>
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" id="swiper-cdn"></script>
+  <script>
+    window.loadSwiperFallback = function () {
+      var s = document.createElement('script');
+      s.src = 'https://unpkg.com/swiper@11/swiper-bundle.min.js';
+      s.onload = function () { window.initJayH5 && window.initJayH5(); };
+      document.head.appendChild(s);
+    };
+    document.getElementById('swiper-cdn').onerror = window.loadSwiperFallback;
+  </script>
+  <script src="js/app.js"></script>
+</body>
+</html>
